@@ -22,3 +22,19 @@ def get_items():
             cards.append({'id': card['id'], 'title': card['name'], 'status': list['name']})
 
     return cards
+
+def add_item(title):
+    """
+    Adds a new item with the specified title to the Trello board.
+
+    Args:
+        title: The title of the item.
+    """
+    list_id = os.getenv('TRELLO_TO_DO_LIST_ID')
+    key = os.getenv('TRELLO_API_KEY')
+    token = os.getenv('TRELLO_API_TOKEN')
+    
+    url = f'https://api.trello.com/1/cards?idList={list_id}&key={key}&token={token}'
+    body = {'name': title}
+
+    requests.post(url, body)
