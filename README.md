@@ -46,7 +46,7 @@ The project uses a web service called Trello to store to-do items. To get the pr
 * Create an API token by clicking the link on the page where your API key is displayed, and use it to populate the `TRELLO_API_TOKEN` variable in the `.env` file
 * Create a new board in your Trello account
 * Follow [these instructions](https://developer.atlassian.com/cloud/trello/guides/rest-api/api-introduction/#your-first-api-call) to get the board ID, and use it to populate the `TRELLO_BOARD_ID` variable in the `.env` file
-* Use [this endpoint](https://developer.atlassian.com/cloud/trello/rest/api-group-boards/#api-boards-id-lists-get) to get the list ID for the list labelled 'To Do', and use it to populate the `TRELLO_TO_DO_LIST_ID` variable in the `.env` file
+* Use [this endpoint](https://developer.atlassian.com/cloud/trello/rest/api-group-boards/#api-boards-id-lists-get) to get the list IDs for the board, and use them to populate the `TRELLO_<list name>_LIST_ID` variables in the `.env` file
 
 ## Running the App
 
