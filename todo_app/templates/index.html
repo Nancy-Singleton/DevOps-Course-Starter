@@ -22,7 +22,12 @@
       <h2>Items</h2>
       <ul class="list-group mb-4">
         {% for item in items %}
-          <li>{{ item.title }}</li>
+          <li>
+            <div>{{ item.title }}</div>
+            <form action="{{ url_for('complete_item', item_id=item.id) }}" method="post" >
+              <button type="submit">Mark as done</button>
+            </form>
+          </li>
         {% endfor %}
       </ul>
     </div>
