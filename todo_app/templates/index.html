@@ -23,7 +23,7 @@
       <ul class="list-group mb-4">
         {% for item in items %}
           <li>
-            <div>{{ item.title }}</div>
+            <div>{{ item.name }}</div>
             <form action="{{ url_for('complete_item', item_id=item.id) }}" method="post" >
               <button type="submit">Mark as done</button>
             </form>

@@ -1,6 +1,8 @@
 import os
 import requests
 
+from todo_app.data.item import Item
+
 def get_trello_items():
     """
     Fetches all saved items from the Trello board.
@@ -19,7 +21,8 @@ def get_trello_items():
     cards = []
     for list in response_json:
         for card in list['cards']:
-            cards.append({'id': card['id'], 'title': card['name'], 'status': list['name']})
+            item = Item.from_trello_card(card, list)
+            cards.append(item)
 
     return cards
 
