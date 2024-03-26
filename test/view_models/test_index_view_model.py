@@ -2,7 +2,7 @@ from todo_app.models.item import Item
 from todo_app.view_models.index_view_model import IndexViewModel
 
 
-def test_does_nothing():
+def test_done_items_property_returns_done_items():
     # arrange
     item_1 = Item(1, 'Completed item 1', 'Done')
     item_2 = Item(2, 'Completed item 2', 'Done')
