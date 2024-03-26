@@ -1,7 +1,7 @@
 import os
 import requests
 
-def get_items():
+def get_trello_items():
     """
     Fetches all saved items from the Trello board.
 
@@ -23,7 +23,7 @@ def get_items():
 
     return cards
 
-def add_item(title):
+def add_trello_item(title):
     """
     Adds a new item with the specified title to the Trello board.
 
