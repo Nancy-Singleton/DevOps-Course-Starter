@@ -1,7 +1,7 @@
 import os
 import requests
 
-from todo_app.data.item import Item
+from todo_app.models.item import Item
 
 def get_trello_items():
     """
