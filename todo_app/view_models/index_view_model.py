@@ -8,4 +8,4 @@ class IndexViewModel:
     
     @property
     def done_items(self):
-        return []
+        return [x for x in self._items if x.is_done()]
