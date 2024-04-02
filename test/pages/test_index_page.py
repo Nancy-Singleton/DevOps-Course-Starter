@@ -15,9 +15,18 @@ def client():
         yield client
 
 def test_index_page(monkeypatch, client):
+    # arrange
     monkeypatch.setattr(requests, 'get', stub)
 
+    # act
     response = client.get('/')
+
+    # assert
+    assert response.status_code == 200
+    
+    response_data = response.data.decode()
+    assert 'Test Card' in response_data
+    assert '456' in response_data
 
 class StubResponse():
     def __init__(self, fake_response_data):
@@ -33,7 +42,7 @@ def stub(url, params={}):
         fake_response_data = [{
             'id': '123abc',
             'name': 'To Do',
-            'cards': [{'id': '456', 'name': 'Test card'}]
+            'cards': [{'id': '456', 'name': 'Test Card'}]
         }]
         return StubResponse(fake_response_data)
 
