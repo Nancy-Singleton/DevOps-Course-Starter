@@ -5,15 +5,15 @@ class IndexViewModel:
     @property
     def items(self):
         return self._items
-    
-    @property
-    def done_items(self):
-        return [x for x in self._items if x.is_done()]
-    
-    @property
-    def doing_items(self):
-        return []
-    
+
     @property
     def to_do_items(self):
         return []
+
+    @property
+    def doing_items(self):
+        return []
+
+    @property
+    def done_items(self):
+        return [x for x in self._items if x.is_done()]
