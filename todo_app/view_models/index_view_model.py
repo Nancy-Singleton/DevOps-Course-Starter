@@ -8,11 +8,11 @@ class IndexViewModel:
 
     @property
     def to_do_items(self):
-        return []
+        return [x for x in self._items if x.is_to_do()]
 
     @property
     def doing_items(self):
-        return []
+        return [x for x in self._items if x.is_doing()]
 
     @property
     def done_items(self):

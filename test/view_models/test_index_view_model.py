@@ -7,7 +7,7 @@ def test_to_do_items_property_returns_to_do_items():
     view_model = IndexViewModel(items)
 
     # act
-    result = view_model.done_items
+    result = view_model.to_do_items
 
     # assert
     assert len(result) == 3    
@@ -18,7 +18,7 @@ def test_doing_items_property_returns_doing_items():
     view_model = IndexViewModel(items)
 
     # act
-    result = view_model.done_items
+    result = view_model.doing_items
 
     # assert
     assert len(result) == 1
