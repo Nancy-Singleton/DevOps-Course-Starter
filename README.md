@@ -70,7 +70,7 @@ Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser
 
 ## Running the Tests
 * The project uses [pytest](https://docs.pytest.org/en/stable/) to run unit tests.
-* To run the tests from the command line, run `pytest`.
+* To run the tests from the command line, run `poetry run pytest`.
 * To run in VSCode:
     * Run `Test: Refresh Tests` from the Command Palette.
     * You can then run or debug tests by:
