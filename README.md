@@ -36,7 +36,17 @@ You'll also need to clone a new `.env` file from the `.env.template` to store lo
 $ cp .env.template .env  # (first time only)
 ```
 
-The `.env` file is used by flask to set environment variables when running `flask run`. This enables things like development mode (which also enables features like hot reloading when you make a file change). There's also a [SECRET_KEY](https://flask.palletsprojects.com/en/2.3.x/config/#SECRET_KEY) variable which is used to encrypt the flask session cookie.
+The `.env` file is used by flask to set environment variables when running `flask run`. This enables things like development mode (which also enables features like hot reloading when you make a file change). There's also a [SECRET_KEY](https://flask.palletsprojects.com/en/2.3.x/config/#SECRET_KEY) variable which is used to encrypt the flask session cookie. There's also some `TRELLO_` variables which are covered in the [Trello Set Up](#trello-set-up) section below.
+
+### Trello Set Up
+
+The project uses a web service called Trello to store to-do items. To get the project running locally, you will need to:
+* [Create a Trello account](https://trello.com/signup)
+* [Generate an API key](https://developer.atlassian.com/cloud/trello/guides/rest-api/api-introduction/#managing-your-api-key) and use it to populate the `TRELLO_API_KEY` variable in the `.env` file
+* Create an API token by clicking the link on the page where your API key is displayed, and use it to populate the `TRELLO_API_TOKEN` variable in the `.env` file
+* Create a new board in your Trello account
+* Follow [these instructions](https://developer.atlassian.com/cloud/trello/guides/rest-api/api-introduction/#your-first-api-call) to get the board ID, and use it to populate the `TRELLO_BOARD_ID` variable in the `.env` file
+* Use [this endpoint](https://developer.atlassian.com/cloud/trello/rest/api-group-boards/#api-boards-id-lists-get) to get the list IDs for the board, and use them to populate the `TRELLO_<list name>_LIST_ID` variables in the `.env` file
 
 ## Running the App
 
