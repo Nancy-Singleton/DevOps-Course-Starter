@@ -4,9 +4,12 @@ from todo_app.data.trello_items import get_trello_items, add_trello_item, comple
 from todo_app.flask_config import Config
 from todo_app.view_models.index_view_model import IndexViewModel
 
-app = Flask(__name__)
-app.config.from_object(Config())
+def create_app():
+    app = Flask(__name__)
+    app.config.from_object(Config())
+    return app
 
+app = create_app()
 
 @app.route('/')
 def index():
