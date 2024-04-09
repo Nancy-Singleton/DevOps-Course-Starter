@@ -19,14 +19,33 @@
 
   <div class="row">
     <div class="col-md-12">
-      <h2>Items</h2>
+      <h2>To Do</h2>
       <ul class="list-group mb-4">
-        {% for item in items %}
+        {% for item in view_model.to_do_items %}
           <li>
             <div>{{ item.name }}</div>
             <form action="{{ url_for('complete_item', item_id=item.id) }}" method="post" >
               <button type="submit">Mark as done</button>
             </form>
+          </li>
+        {% endfor %}
+      </ul>
+      <h2>Doing</h2>
+      <ul>
+        {% for item in view_model.doing_items %}
+          <li>
+            <div>{{ item.name }}</div>
+            <form action="{{ url_for('complete_item', item_id=item.id) }}" method="post" >
+              <button type="submit">Mark as done</button>
+            </form>
+          </li>
+        {% endfor %}
+      </ul>
+      <h2>Done</h2>
+      <ul>
+        {% for item in view_model.done_items %}
+          <li>
+            <div>{{ item.name }}</div>
           </li>
         {% endfor %}
       </ul>

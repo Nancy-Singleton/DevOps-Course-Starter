@@ -1,7 +1,7 @@
 import os
 import requests
 
-from todo_app.data.item import Item
+from todo_app.models.item import Item
 
 def get_trello_items():
     """
@@ -13,9 +13,14 @@ def get_trello_items():
     board_id = os.getenv('TRELLO_BOARD_ID')
     key = os.getenv('TRELLO_API_KEY')
     token = os.getenv('TRELLO_API_TOKEN')
-    trello_get_cards_url = f'https://api.trello.com/1/boards/{board_id}/lists?key={key}&token={token}&cards=open'
+    trello_get_cards_url = f'https://api.trello.com/1/boards/{board_id}/lists'
+    params = {
+        'key': key,
+        'token': token,
+        'cards': 'open'
+    }
 
-    response = requests.get(trello_get_cards_url)
+    response = requests.get(trello_get_cards_url, params=params)
     response_json = response.json()
 
     cards = []
@@ -37,10 +42,15 @@ def add_trello_item(title):
     key = os.getenv('TRELLO_API_KEY')
     token = os.getenv('TRELLO_API_TOKEN')
     
-    url = f'https://api.trello.com/1/cards?idList={list_id}&key={key}&token={token}'
+    url = f'https://api.trello.com/1/cards'
+    params = {
+        'idList': list_id,
+        'key': key,
+        'token': token
+    }
     body = {'name': title}
 
-    requests.post(url, body)
+    requests.post(url, body, params=params)
 
 def complete_trello_item(item_id):
     """
@@ -53,7 +63,11 @@ def complete_trello_item(item_id):
     key = os.getenv('TRELLO_API_KEY')
     token = os.getenv('TRELLO_API_TOKEN')
 
-    url=f'https://api.trello.com/1/cards/{item_id}?key={key}&token={token}'
+    url=f'https://api.trello.com/1/cards/{item_id}'
+    params = {
+        'key': key,
+        'token': token
+    }
     body = {'idList': done_list_id}
 
-    requests.put(url, body)
+    requests.put(url, body, params=params)
