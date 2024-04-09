@@ -26,5 +26,3 @@ def create_app():
         return redirect('/')
 
     return app
-
-app = create_app()
