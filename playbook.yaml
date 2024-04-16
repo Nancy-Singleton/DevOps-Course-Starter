@@ -62,3 +62,17 @@
         src: .env.j2
         dest: /opt/todoapp/.env
         owner: ec2-user
+
+    - name: Copy Systemd Service
+      become: true
+      copy:
+        src: todoapp.service
+        dest: /etc/systemd/system/todoapp.service
+        owner: ec2-user
+
+    - name: Start Systemd Service
+      become: true
+      systemd_service:
+        name: todoapp
+        daemon_reload: true
+        state: restarted
