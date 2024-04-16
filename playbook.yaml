@@ -1,0 +1,64 @@
+---
+- name: Configure App
+  hosts: webservers
+  remote_user: ec2-user
+
+  vars_prompt:
+    - name: TRELLO_API_KEY
+      prompt: Trello API Key?
+
+    - name: TRELLO_API_TOKEN
+      prompt: Trello API Token?
+
+    - name: TRELLO_BOARD_ID
+      prompt: Trello Board ID?
+      default: 65e4d3b571aacb487f9dc1bf
+
+    - name: TRELLO_TO_DO_LIST_ID
+      prompt: Trello "To-Do" List ID?
+      default: 65e4d3b571aacb487f9dc1c6
+
+    - name: TRELLO_DOING_LIST_ID
+      prompt: Trello "Doing" List ID?
+      default: 65e4d3b571aacb487f9dc1c7
+
+    - name: TRELLO_DONE_LIST_ID
+      prompt: Trello "Done" List ID?
+      default: 65e4d3b571aacb487f9dc1c8
+
+  tasks:
+    - name: Install Dependencies
+      become: true
+      yum:
+        name:
+          - git
+          - python3
+        state: present
+
+    - name: Install Poetry
+      shell: curl -sSL https://install.python-poetry.org | python3 -
+      args:
+        creates: ~/.local/bin/poetry
+
+    - name: Create App Directory
+      become: true
+      file:
+        path: /opt/todoapp
+        owner: ec2-user
+        state: directory
+
+    - name: Clone App
+      git:
+        repo: https://github.com/Nancy-Singleton/DevOps-Course-Starter
+        dest: /opt/todoapp
+
+    - name: Install Poetry Dependencies
+      command: ~/.local/bin/poetry install
+      args:
+        chdir: /opt/todoapp
+
+    - name: Create Env File
+      template:
+        src: .env.j2
+        dest: /opt/todoapp/.env
+        owner: ec2-user
