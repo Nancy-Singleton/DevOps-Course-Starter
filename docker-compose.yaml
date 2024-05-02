@@ -1,0 +1,9 @@
+services:
+  todo-app:
+    image: todo-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8080:5000
+    platform: linux/amd64
