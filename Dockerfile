@@ -8,3 +8,4 @@ COPY . .
 RUN root/.local/bin/poetry install
 
 ENTRYPOINT root/.local/bin/poetry run flask run --host=0.0.0.0
+EXPOSE 5000
