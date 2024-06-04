@@ -11,3 +11,4 @@ inventory.yaml
 playbook.yaml
 README.md
 todoapp.service
+**/__pycache__
