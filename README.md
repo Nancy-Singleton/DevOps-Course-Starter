@@ -89,3 +89,19 @@ $ ansible-playbook -i <inventory file> playbook.yaml
 ```
 
 The app can then be accessed on port 5000 of each host.
+
+## Running the App in Docker
+
+### Production
+
+Run `docker compose -f docker-compose-prod.yaml up --build`.
+
+The app can then be accessed at `http://localhost:8080/`. 
+
+### Development
+
+Run `docker compose -f docker-compose-dev.yaml up --build`.
+
+The app can then be accessed at `http://localhost:8080/`. 
+
+Changes made to your local code files should be reflected in the app without needing to rebuild the image.
