@@ -15,3 +15,7 @@ EXPOSE 5000
 
 FROM base as development
 EXPOSE 5000
+
+FROM base as test
+COPY test/ test
+ENTRYPOINT root/.local/bin/poetry run pytest
