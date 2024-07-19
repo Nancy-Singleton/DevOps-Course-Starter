@@ -3,7 +3,6 @@
 .env
 .env.j2
 .env.template
-.env.test
 .gitignore
 docker-compose.yaml
 Dockerfile
