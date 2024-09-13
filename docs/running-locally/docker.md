@@ -6,7 +6,7 @@
 
 ## Development Build
 
-Run `docker compose -f docker-compose-dev.yaml up --build`.
+Run `docker compose -f docker/docker-compose-dev.yaml up --build`.
 
 The app can then be accessed at `http://localhost:8080/`.
 
@@ -14,6 +14,6 @@ Changes made to your local code files should be reflected in the app without nee
 
 ## Production Build
 
-Run `docker compose -f docker-compose-prod.yaml up --build`.
+Run `docker compose -f docker/docker-compose-prod.yaml up --build`.
 
 The app can then be accessed at `http://localhost:8080/`.

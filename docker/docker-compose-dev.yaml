@@ -2,11 +2,15 @@ services:
   todo-app:
     image: todo-app
     build:
-      context: .
+      context: ..
       dockerfile: docker/Dockerfile
-      target: production
+      target: development
     ports:
       - 8080:5000
     env_file:
-      - env/.env
+      - ../env/.env
     platform: linux/amd64
+    volumes:
+      - type: bind
+        source: ../todo_app
+        target: /todo_app
