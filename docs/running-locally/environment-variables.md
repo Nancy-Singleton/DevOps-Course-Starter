@@ -3,7 +3,7 @@
 - Clone a new `.env` file from the `.env.template` to store local configuration options:
 
 ```bash
-$ cp .env.template .env
+$ cd env && cp .env.template .env.test
 ```
 
 # Trello Set Up

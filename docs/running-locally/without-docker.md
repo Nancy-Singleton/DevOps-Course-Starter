@@ -16,7 +16,7 @@ $ poetry install
 
 Start the Flask app in development mode within the Poetry environment by running:
 ```bash
-$ poetry run flask run
+$ poetry run flask --env-file env/.env run
 ```
 
 You should see output similar to the following:

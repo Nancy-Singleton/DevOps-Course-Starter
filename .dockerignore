@@ -1,8 +1,8 @@
 .github/
 .vscode/
-.env
-.env.j2
-.env.template
+env/.env
+env/.env.j2
+env/.env.template
 .gitignore
 docker-compose.yaml
 Dockerfile

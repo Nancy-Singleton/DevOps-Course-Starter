@@ -8,7 +8,7 @@ services:
     ports:
       - 8080:5000
     env_file:
-      - .env
+      - env/.env
     platform: linux/amd64
     volumes:
       - type: bind

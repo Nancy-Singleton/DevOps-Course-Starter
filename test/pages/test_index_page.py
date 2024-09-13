@@ -6,7 +6,7 @@ from todo_app import app
 
 @pytest.fixture
 def client():
-    file_path = find_dotenv('.env.test')
+    file_path = find_dotenv('env/.env.test')
     load_dotenv(file_path, override=True)
 
     test_app = app.create_app()
@@ -23,7 +23,7 @@ def test_index_page(monkeypatch, client):
 
     # assert
     assert response.status_code == 200
-    
+
     response_data = response.data.decode()
     assert 'Test Card' in response_data
     assert '456' in response_data
@@ -34,7 +34,7 @@ class StubResponse():
 
     def json(self):
         return self.fake_response_data
-    
+
 def stub(url, params={}):
     test_board_id = os.environ.get('TRELLO_BOARD_ID')
 

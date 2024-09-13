@@ -1,7 +1,7 @@
 FROM python:3-buster as base
 
 
-RUN apt-get update 
+RUN apt-get update
 RUN apt-get install -y curl
 RUN curl -sSL https://install.python-poetry.org | python3 -
 
@@ -20,5 +20,5 @@ EXPOSE 5000
 
 FROM base as test
 COPY test/ test
-COPY .env.test .
+COPY env/.env.test env/
 ENTRYPOINT root/.local/bin/poetry run pytest test

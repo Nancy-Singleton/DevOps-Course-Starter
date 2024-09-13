@@ -59,7 +59,7 @@
 
     - name: Create Env File
       template:
-        src: .env.j2
+        src: env/.env.j2
         dest: /opt/todoapp/.env
         owner: ec2-user
 
