@@ -4,12 +4,12 @@ on:
       paths-ignore:
       - 'README.md'
       - 'docs/**'
-      - 'docker-compose-*.yaml'
+      - 'docker/docker-compose-*.yaml'
   pull_request:
     paths-ignore:
       - 'README.md'
       - 'docs/**'
-      - 'docker-compose-*.yaml'
+      - 'docker/docker-compose-*.yaml'
 
 jobs:
   build:
@@ -17,5 +17,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - run: docker build --target test --tag todo-app-tests .
+    - run: docker build --file docker/Dockerfile --target test --tag todo-app-tests .
     - run: docker run todo-app-tests

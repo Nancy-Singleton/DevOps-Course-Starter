@@ -3,7 +3,7 @@ services:
     image: todo-app
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: docker/Dockerfile
       target: production
     ports:
       - 8080:5000

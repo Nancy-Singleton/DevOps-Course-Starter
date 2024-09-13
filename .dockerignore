@@ -5,7 +5,7 @@ env/.env.j2
 env/.env.template
 .gitignore
 docker-compose.yaml
-Dockerfile
+docker/Dockerfile
 inventory.yaml
 playbook.yaml
 README.md
