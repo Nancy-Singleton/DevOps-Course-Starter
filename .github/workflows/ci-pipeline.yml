@@ -32,3 +32,4 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - run: docker build --file docker/Dockerfile --target production --tag ${{ secrets.DOCKERHUB_USERNAME }}/todo-app:${{ github.sha }} .
       - run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/todo-app:${{ github.sha }}
+      - run: curl -dH -X POST '${{ secrets.AZURE_WEBHOOK }}'
