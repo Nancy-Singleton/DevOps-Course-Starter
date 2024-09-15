@@ -12,4 +12,4 @@ See instructions for running the tests [here](docs/tests.md).
 
 # Deploying the app
 
-See instructions for deploying the app [here](docs/deployment.md).
+See instructions for deploying the app [here](docs/manual-deployment.md).
