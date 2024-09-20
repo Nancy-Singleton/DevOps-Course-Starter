@@ -6,8 +6,5 @@ env/.env.template
 .gitignore
 docker-compose.yaml
 docker/Dockerfile
-inventory.yaml
-playbook.yaml
 README.md
-todoapp.service
 **/__pycache__
