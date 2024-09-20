@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-- Follow the steps [here](environment-variables) to configure environment variables.
+- Follow the steps [here](environment-variables.md) to configure environment variables.
 
 ## Development Build
 
