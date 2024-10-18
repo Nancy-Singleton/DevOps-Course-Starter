@@ -1,36 +1,6 @@
 import os
 import requests
 
-from todo_app.models.item import Item
-
-def get_trello_items():
-    """
-    Fetches all saved items from the Trello board.
-
-    Returns:
-        list: The list of saved items.
-    """
-    board_id = os.getenv('TRELLO_BOARD_ID')
-    key = os.getenv('TRELLO_API_KEY')
-    token = os.getenv('TRELLO_API_TOKEN')
-    trello_get_cards_url = f'https://api.trello.com/1/boards/{board_id}/lists'
-    params = {
-        'key': key,
-        'token': token,
-        'cards': 'open'
-    }
-
-    response = requests.get(trello_get_cards_url, params=params)
-    response_json = response.json()
-
-    cards = []
-    for list in response_json:
-        for card in list['cards']:
-            item = Item.from_trello_card(card, list)
-            cards.append(item)
-
-    return cards
-
 def add_trello_item(title):
     """
     Adds a new item with the specified title to the Trello board.
