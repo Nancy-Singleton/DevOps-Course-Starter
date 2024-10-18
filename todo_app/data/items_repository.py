@@ -13,7 +13,8 @@ def get_items():
     db_records = get_items_collection().find()
     items = []
     for record in db_records:
-        item = Item(record.get('_id'), record.get('name'), record.get('status'))
+        id = str(record.get('_id'))
+        item = Item(id, record.get('name'), record.get('status'))
         items.append(item)
     return items
 
