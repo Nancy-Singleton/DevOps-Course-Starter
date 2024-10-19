@@ -1,4 +1,5 @@
 import os
+from bson import ObjectId
 import pymongo
 
 from todo_app.models.item import Item
@@ -27,6 +28,17 @@ def save_item(title):
     """
     db_collection = get_items_collection()
     db_collection.insert_one({"name": title, "status": "To Do"})
+
+def mark_item_done(item_id):
+    """
+    Updates the status of the specified item to "Done".
+
+    Args:
+        item_id: The id of the item.
+    """
+    db_collection = get_items_collection()
+    db_collection.update_one({'_id': ObjectId(item_id)}, { "$set": { "status": "Done" } })
+
 
 def get_items_collection():
     database_client = pymongo.MongoClient(os.getenv('CONNECTION_STRING'))
