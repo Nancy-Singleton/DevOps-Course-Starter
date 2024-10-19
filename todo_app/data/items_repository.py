@@ -18,6 +18,15 @@ def get_items():
         items.append(item)
     return items
 
+def save_item(title):
+    """
+    Creates a new item with the specified title.
+
+    Args:
+        title: The title of the item.
+    """
+    db_collection = get_items_collection()
+    db_collection.insert_one({"name": title, "status": "To Do"})
 
 def get_items_collection():
     database_client = pymongo.MongoClient(os.getenv('CONNECTION_STRING'))
