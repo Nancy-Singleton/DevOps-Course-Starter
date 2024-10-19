@@ -6,21 +6,21 @@ C4Component
         Component(htmlTemplates, "HTML Templates")
         Component(routes, "Webserver Routes", "app.py")
         Component(dataClasses, "Data Classes")
-        Component(trelloClient, "Trello Client", "trello_items.py")
+        Component(mongoDbClient, "MongoDB Client", "items_repository.py")
     }
 
-    System_Ext(trelloApi, "Trello API")
+    System_Ext(mongoDb, "Mongo DB")
 
     Rel(flask, routes, "Passes request to")
 
     Rel(htmlTemplates, routes, "")
     Rel(dataClasses, routes, "")
-    Rel(dataClasses, trelloClient, "")
-    Rel(routes, trelloClient, "")
+    Rel(dataClasses, mongoDbClient, "")
+    Rel(routes, mongoDbClient, "")
 
-    Rel(trelloClient, trelloApi, "Talks via HTTP")
+    Rel(mongoDbClient, mongoDb, "Talks via HTTP")
 
     UpdateLayoutConfig($c4ShapeInRow="3")
     UpdateRelStyle(flask, routes, $offsetX="-175", $offsetY="-50")
-    UpdateRelStyle(trelloClient, trelloApi, $offsetX="85", $offsetY="-150")
+    UpdateRelStyle(mongoDbClient, mongoDb, $offsetX="85", $offsetY="-150")
 ```
