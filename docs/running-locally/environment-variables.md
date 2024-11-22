@@ -3,17 +3,18 @@
 - Clone a new `.env` file from the `.env.template` to store local configuration options:
 
 ```bash
-$ cd env && cp .env.template .env
+$ cd env && cp .env.template .env.test
 ```
 
-# Mongo DB
+# Trello Set Up
 
-The project requires a MongoDB database.
+The project uses a web service called Trello to store to-do items. 
 
-Before running the app locally, you will need to add a connection string to your local `env` file.
+Before running the app locally, you will need to set up some Trello configuration as follows.
 
-You can create a new Cosmos DB database in Azure via the following commands:
-- Create a CosmosDB Account: `az cosmosdb create --name <cosmos_account_name> --resource-group <resource_group_name> --kind MongoDB --capabilities EnableServerless --server-version 4.2`
-- Create `new` MongoDB database under that account `az cosmosdb mongodb database create --account-name <cosmos_account_name> --name <database_name> --resource-group <resource_group_name>`
-
-Given an existing Cosmos DB database, you can find the connection string in the Azure portal under Settings > Connection Strings.
+* [Create a Trello account](https://trello.com/signup)
+* [Generate an API key](https://developer.atlassian.com/cloud/trello/guides/rest-api/api-introduction/#managing-your-api-key) and use it to populate the `TRELLO_API_KEY` variable in the `.env` file
+* Create an API token by clicking the link on the page where your API key is displayed, and use it to populate the `TRELLO_API_TOKEN` variable in the `.env` file
+* Create a new board in your Trello account
+* Follow [these instructions](https://developer.atlassian.com/cloud/trello/guides/rest-api/api-introduction/#your-first-api-call) to get the board ID, and use it to populate the `TRELLO_BOARD_ID` variable in the `.env` file
+* Use [this endpoint](https://developer.atlassian.com/cloud/trello/rest/api-group-boards/#api-boards-id-lists-get) to get the list IDs for the board, and use them to populate the `TRELLO_<list name>_LIST_ID` variables in the `.env` file
