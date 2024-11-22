@@ -43,4 +43,4 @@ def mark_item_done(item_id):
 def get_items_collection():
     database_client = pymongo.MongoClient(os.getenv('CONNECTION_STRING'))
     database = database_client[os.getenv('DATABASE_NAME')]
-    return database['to_do_items']
+    return database[os.getenv('ITEMS_COLLECTION_NAME')]

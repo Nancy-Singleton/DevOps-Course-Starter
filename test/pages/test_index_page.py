@@ -31,5 +31,5 @@ def test_index_page(client):
 def set_up_data():
     database_client = pymongo.MongoClient(os.getenv('CONNECTION_STRING'))
     database = database_client[os.getenv('DATABASE_NAME')]
-    collection = database['to_do_items']
+    collection = database[os.getenv('ITEMS_COLLECTION_NAME')]
     collection.insert_one({"name": "Test Card", "status": "To Do"})
