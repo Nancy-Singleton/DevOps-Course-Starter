@@ -18,6 +18,9 @@ FROM base as development
 ENTRYPOINT root/.local/bin/poetry run flask run --host=0.0.0.0
 EXPOSE 5000
 
+FROM base as vulnerability_scan
+ENTRYPOINT root/.local/bin/poetry run safety check
+
 FROM base as test
 COPY ../test test
 COPY ../env/.env.test env/
