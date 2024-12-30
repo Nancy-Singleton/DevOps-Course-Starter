@@ -9,4 +9,4 @@ These diagrams are made using [Mermaid](https://mermaid.js.org/syntax/c4.html). 
 
 # Database
 
-This project uses a CosmosDB database, and data is encrypted at rest.
+This project uses a CosmosDB database, and data is encrypted at rest (see [here](https://learn.microsoft.com/en-us/azure/cosmos-db/database-encryption-at-rest)).
