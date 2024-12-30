@@ -19,6 +19,14 @@ jobs:
     - uses: actions/checkout@v4
     - run: docker build --file docker/Dockerfile --target test --tag todo-app-tests .
     - run: docker run todo-app-tests
+  scan:
+    name: Vulnerability scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build --file docker/Dockerfile --target vulnerability_scan --tag todo-app-vulnerability-scan .
+      - run: docker run todo-app-vulnerability-scan
+        continue-on-error: true
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
