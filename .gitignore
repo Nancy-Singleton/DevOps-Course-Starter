@@ -117,3 +117,6 @@ dmypy.json
 
 ### Configuration files ###
 env/.env
+
+### Terraform files ###
+.terraform/
