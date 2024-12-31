@@ -120,3 +120,4 @@ env/.env
 
 ### Terraform files ###
 .terraform/
+terraform.tfstate
