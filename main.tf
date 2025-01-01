@@ -5,6 +5,13 @@ terraform {
       version = ">= 3.8"
     }
   }
+
+  backend "azurerm" {
+    resource_group_name  = "cohort32-33_NanSin_ProjectExercise"
+    storage_account_name = "nansinstorageaccount01"
+    container_name       = "nansin-container-01"
+    key                  = "terraform.tfstate"
+  }
 }
 
 provider "azurerm" {
