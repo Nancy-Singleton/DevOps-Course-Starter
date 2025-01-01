@@ -39,10 +39,32 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - run: docker build --file docker/Dockerfile --target production --tag ${{ secrets.DOCKERHUB_USERNAME }}/todo-app:${{ github.sha }} --tag ${{ secrets.DOCKERHUB_USERNAME }}/todo-app:prod .
       - run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/todo-app --all-tags
+  provision:
+    name: Provision
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref_name == 'main'
+    env:
+      ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+      ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+      TF_VAR_prefix: prod
+    steps:
+      - uses: actions/checkout@v4
+      - run: terraform init
+      - env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          webhook_url=$(terraform output -raw webhook_url)
+          gh secret set WEBHOOK_URL --body $webhook_url
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
-    needs: build
-    # if: github.event_name == 'push' && github.ref_name == 'main'
+    needs: 
+      - build
+      - provision
+    if: github.event_name == 'push' && github.ref_name == 'main'
     steps:
-      - run: curl -dH -X POST '${{ secrets.AZURE_WEBHOOK }}'
+      - env:
+          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
+        run: curl -dH -X POST "$WEBHOOK_URL"
