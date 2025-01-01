@@ -38,11 +38,11 @@ resource "azurerm_linux_web_app" "main" {
   }
 
   app_settings = {
-    "FLASK_APP" = "todo_app/app"
-    "FLASK_DEBUG" = true
-    "SECRET_KEY" = "secret-key"
-    "CONNECTION_STRING" = azurerm_cosmosdb_account.db_account.primary_mongodb_connection_string
-    "DATABASE_NAME" = "app-database"
+    "FLASK_APP"             = "todo_app/app"
+    "FLASK_DEBUG"           = true
+    "SECRET_KEY"            = "secret-key"
+    "CONNECTION_STRING"     = azurerm_cosmosdb_account.db_account.primary_mongodb_connection_string
+    "DATABASE_NAME"         = "app-database"
     "ITEMS_COLLECTION_NAME" = "to_do_items"
   }
 }
@@ -55,12 +55,16 @@ resource "azurerm_cosmosdb_account" "db_account" {
   kind                 = "MongoDB"
   mongo_server_version = "7.0"
 
+  capabilities {
+    name = "EnableMongo"
+  }
+
   consistency_policy {
     consistency_level = "Eventual"
   }
 
   geo_location {
-    location              = "uksouth"
+    location          = "uksouth"
     failover_priority = 0
   }
 
@@ -73,4 +77,8 @@ resource "azurerm_cosmosdb_mongo_database" "db" {
   name                = "nansin-db-01"
   resource_group_name = azurerm_cosmosdb_account.db_account.resource_group_name
   account_name        = azurerm_cosmosdb_account.db_account.name
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
