@@ -51,6 +51,7 @@ resource "azurerm_linux_web_app" "main" {
     "CONNECTION_STRING"     = azurerm_cosmosdb_account.db_account.primary_mongodb_connection_string
     "DATABASE_NAME"         = azurerm_cosmosdb_mongo_database.db.name
     "ITEMS_COLLECTION_NAME" = "to_do_items"
+    "LOGGLY_TOKEN"          = "${var.loggly_token}"
   }
 }
 

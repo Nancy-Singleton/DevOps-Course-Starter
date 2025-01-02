@@ -1,4 +1,6 @@
 from flask import Flask, render_template, redirect, request
+from loggly.handlers import HTTPSHandler
+from logging import Formatter
 from todo_app.data.items_repository import get_items, save_item, mark_item_done
 
 from todo_app.flask_config import Config
@@ -8,6 +10,13 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(Config())
     app.logger.setLevel(app.config['LOG_LEVEL'])
+
+    if app.config['LOGGLY_TOKEN'] is not None:
+        handler = HTTPSHandler(f'https://logs-01.loggly.com/inputs/{app.config["LOGGLY_TOKEN"]}/tag/todo-app')
+        handler.setFormatter(
+            Formatter("[%(asctime)s] %(levelname)s in %(module)s: %(message)s")
+        )
+        app.logger.addHandler(handler)
 
     @app.route('/')
     def index():

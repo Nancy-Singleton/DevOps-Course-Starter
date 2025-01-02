@@ -11,3 +11,4 @@ class Config:
         self.LOG_LEVEL = os.environ.get('LOG_LEVEL')
         if not self.LOG_LEVEL:
             self.LOG_LEVEL = 'ERROR'
+        self.LOGGLY_TOKEN = os.environ.get('LOGGLY_TOKEN')
