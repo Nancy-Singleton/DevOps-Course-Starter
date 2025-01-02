@@ -12,8 +12,8 @@ on:
       - 'docker/docker-compose-*.yaml'
 
 jobs:
-  build:
-    name: Build and test
+  test:
+    name: Test
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -27,10 +27,9 @@ jobs:
       - run: docker build --file docker/Dockerfile --target vulnerability_scan --tag todo-app-vulnerability-scan .
       - run: docker run todo-app-vulnerability-scan
         continue-on-error: true
-  deploy:
-    name: Deploy
+  build:
+    name: Build
     runs-on: ubuntu-latest
-    needs: build
     if: github.event_name == 'push' && github.ref_name == 'main'
     steps:
       - uses: actions/checkout@v4
@@ -40,4 +39,41 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - run: docker build --file docker/Dockerfile --target production --tag ${{ secrets.DOCKERHUB_USERNAME }}/todo-app:${{ github.sha }} --tag ${{ secrets.DOCKERHUB_USERNAME }}/todo-app:prod .
       - run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/todo-app --all-tags
-      - run: curl -dH -X POST '${{ secrets.AZURE_WEBHOOK }}'
+  provision:
+    name: Provision
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref_name == 'main'
+    env:
+      ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+      ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+      TF_VAR_prefix: prod
+    steps:
+      - uses: actions/checkout@v4
+      - name: Init Terraform
+        run: |
+          cd terraform
+          terraform init
+      - name: Apply Terraform
+        run: |
+          cd terraform
+          terraform apply -auto-approve
+      - name: Save Webhook
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          cd terraform
+          webhook_url=$(terraform output -raw webhook_url)
+          gh secret set WEBHOOK_URL --body $webhook_url
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    needs: 
+      - build
+      - provision
+    if: github.event_name == 'push' && github.ref_name == 'main'
+    steps:
+      - env:
+          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
+        run: curl -dH -X POST "$WEBHOOK_URL"

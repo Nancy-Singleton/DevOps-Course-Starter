@@ -8,3 +8,6 @@ docker-compose.yaml
 docker/Dockerfile
 README.md
 **/__pycache__
+.terraform/
+terraform.tfstate
+terraform.tfstate.backup
