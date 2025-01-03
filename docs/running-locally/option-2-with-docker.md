@@ -2,7 +2,8 @@
 
 ## Prerequisites
 
-- Follow the steps [here](environment-variables.md) to configure environment variables.
+- Follow the steps [here](shared-steps#mongo-db) to make sure you have a database available.
+- Follow the steps [here](shared-steps#setting-up-env-file) to set up a `.env` file.
 
 ## Development Build
 
