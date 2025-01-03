@@ -10,7 +10,7 @@
 $ poetry install
 ```
 
-- Follow the steps [here](environment-variables) to configure environment variables.
+- Follow the steps [here](shared-steps#setting-up-env-file) to set up a `.env` file.
 
 # Running the App
 
