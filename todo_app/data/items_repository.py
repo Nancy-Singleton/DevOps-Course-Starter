@@ -40,6 +40,15 @@ def change_item_status(item_id, status):
     db_collection = get_items_collection()
     db_collection.update_one({'_id': ObjectId(item_id)}, { "$set": { "status": status } })
 
+def delete_item_by_id(item_id):
+    """
+    Deletes the item with the specified id.
+
+    Args:
+        item_id: The id of the item.
+    """
+    db_collection = get_items_collection()
+    db_collection.delete_one({'_id': ObjectId(item_id)})
 
 def get_items_collection():
     database_client = pymongo.MongoClient(os.getenv('CONNECTION_STRING'))

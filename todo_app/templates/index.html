@@ -31,6 +31,7 @@
             Status
           </th>
           <th scope="col"></th>
+          <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
@@ -48,6 +49,11 @@
               <button type="submit" class="btn btn-primary">Mark as To Do</button>
             </form>
             {% endif %}
+          </td>
+          <td>
+            <form action="{{ url_for('delete_item', item_id=item.id) }}" method="post" >
+              <button type="submit" class="btn btn-primary">Delete</button>
+            </form>
           </td>
         </tr>
         {% endfor %}
