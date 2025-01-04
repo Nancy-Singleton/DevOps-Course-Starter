@@ -20,7 +20,7 @@ def create_app():
 
     @app.route('/')
     def index():
-        items = get_items()
+        items = sorted(get_items(), key=lambda item: item.status, reverse=True)
         item_view_model = IndexViewModel(items)
 
         app.logger.info("Homepage loaded")
