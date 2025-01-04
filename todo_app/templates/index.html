@@ -10,9 +10,11 @@
   <div>
     <h2>Add a new item</h2>
     <form action="/item" method="post">
-      <div>
+      <div class="input-group">
         <input type="text" name="title" id="title" required />
-        <button type="submit">Add Item</button>
+        <div class="input-group-append" id="button-addon4">
+          <button type="submit" class="btn btn-primary">Add Item</button>
+        </div>
       </div>
     </form>
   </div>
