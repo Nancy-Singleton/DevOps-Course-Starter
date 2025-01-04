@@ -27,6 +27,9 @@
           <th scope="col">
             Item
           </th>
+          <th scope="col">
+            Status
+          </th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -34,10 +37,11 @@
         {% for item in view_model.items %}
         <tr>
           <td>{{ item.name }}</td>
+          <td>{{ item.status }}</td>
           <td>
             {% if item.status == 'To Do' %}
             <form action="{{ url_for('complete_item', item_id=item.id) }}" method="post" >
-              <button type="submit" class="btn btn-primary">Mark as done</button>
+              <button type="submit" class="btn btn-primary">Mark as Done</button>
             </form>
             {% endif %}
           </td>
