@@ -8,7 +8,7 @@
   </div>
 
   <div>
-    <h2>Add a new item</h2>
+    <h2>New Item</h2>
     <form action="/item" method="post">
       <div class="input-group">
         <input type="text" name="title" id="title" required />
@@ -19,38 +19,31 @@
     </form>
   </div>
 
-  <div class="row">
-    <div class="col-md-12">
-      <h2>To Do</h2>
-      <ul class="list-group mb-4">
-        {% for item in view_model.to_do_items %}
-          <li>
-            <div>{{ item.name }}</div>
+  <div class="mt-5">
+    <h2>My To-Dos</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">
+            Item
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in view_model.items %}
+        <tr>
+          <td>{{ item.name }}</td>
+          <td>
+            {% if item.status == 'To Do' %}
             <form action="{{ url_for('complete_item', item_id=item.id) }}" method="post" >
-              <button type="submit">Mark as done</button>
+              <button type="submit" class="btn btn-primary">Mark as done</button>
             </form>
-          </li>
+            {% endif %}
+          </td>
+        </tr>
         {% endfor %}
-      </ul>
-      <h2>Doing</h2>
-      <ul>
-        {% for item in view_model.doing_items %}
-          <li>
-            <div>{{ item.name }}</div>
-            <form action="{{ url_for('complete_item', item_id=item.id) }}" method="post" >
-              <button type="submit">Mark as done</button>
-            </form>
-          </li>
-        {% endfor %}
-      </ul>
-      <h2>Done</h2>
-      <ul>
-        {% for item in view_model.done_items %}
-          <li>
-            <div>{{ item.name }}</div>
-          </li>
-        {% endfor %}
-      </ul>
-    </div>
+      </tbody>
+    </table>
   </div>
 {% endblock %}
