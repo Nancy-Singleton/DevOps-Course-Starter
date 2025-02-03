@@ -1,7 +1,7 @@
 from flask import Flask, render_template, redirect, request
 from loggly.handlers import HTTPSHandler
 from logging import Formatter
-from todo_app.data.items_repository import get_items, save_item, mark_item_done
+from todo_app.data.items_repository import get_items, save_item, change_item_status, delete_item_by_id
 
 from todo_app.flask_config import Config
 from todo_app.view_models.index_view_model import IndexViewModel
@@ -20,7 +20,7 @@ def create_app():
 
     @app.route('/')
     def index():
-        items = get_items()
+        items = sorted(get_items(), key=lambda item: item.status, reverse=True)
         item_view_model = IndexViewModel(items)
 
         app.logger.info("Homepage loaded")
@@ -36,9 +36,23 @@ def create_app():
 
     @app.route('/complete_item/<item_id>', methods=['POST'])
     def complete_item(item_id):
-        mark_item_done(item_id)
+        change_item_status(item_id, "Done")
 
         app.logger.info("Item completed")
+        return redirect('/')
+
+    @app.route('/uncomplete_item/<item_id>', methods=['POST'])
+    def uncomplete_item(item_id):
+        change_item_status(item_id, "To Do")
+
+        app.logger.info("Item uncompleted")
+        return redirect('/')
+
+    @app.route('/delete_item/<item_id>', methods=['POST'])
+    def delete_item(item_id):
+        delete_item_by_id(item_id)
+
+        app.logger.info("Item deleted")
         return redirect('/')
 
     return app

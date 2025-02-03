@@ -29,16 +29,26 @@ def save_item(title):
     db_collection = get_items_collection()
     db_collection.insert_one({"name": title, "status": "To Do"})
 
-def mark_item_done(item_id):
+def change_item_status(item_id, status):
     """
-    Updates the status of the specified item to "Done".
+    Updates the status of the specified item.
+
+    Args:
+        item_id: The id of the item.
+        status: The new status of the item.
+    """
+    db_collection = get_items_collection()
+    db_collection.update_one({'_id': ObjectId(item_id)}, { "$set": { "status": status } })
+
+def delete_item_by_id(item_id):
+    """
+    Deletes the item with the specified id.
 
     Args:
         item_id: The id of the item.
     """
     db_collection = get_items_collection()
-    db_collection.update_one({'_id': ObjectId(item_id)}, { "$set": { "status": "Done" } })
-
+    db_collection.delete_one({'_id': ObjectId(item_id)})
 
 def get_items_collection():
     database_client = pymongo.MongoClient(os.getenv('CONNECTION_STRING'))
