@@ -4,7 +4,7 @@ See architecture diagrams [here](docs/architecture/architecture.md).
 
 # Running the app
 
-See instructions for running the app using Docker [here](docs/running-locally/docker.md), and without Docker [here](docs/running-locally/without-docker.md).
+See instructions for running the app locally [here](docs/running-locally). There are options for using minikube, docker, or neither.
 
 # Running the tests
 
